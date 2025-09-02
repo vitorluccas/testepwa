@@ -1,23 +1,78 @@
 <script setup>
 import HeaderComponent from '../components/HeaderComponent.vue';
 import FooterComponent from '../components/FooterComponent.vue';
+import { reactive } from 'vue';
+
+const posts = reactive([
+  {
+    id: 1,
+    title: "EcoCharge",
+    description: "Estações de recarga para veículos elétricos abastecidas com energia solar.",
+    image: null,
+  },
+  {
+    id: 2,
+    title: "FinWise",
+    description: "Aplicativo de gestão financeira pessoal com análise de gastos e projeções automáticas.",
+    image: "finwise.png",
+  },
+  {
+    id: 3,
+    title: "SmartAgro",
+    description: "Sistema de monitoramento agrícola com sensores IoT para otimizar irrigação e produtividade.",
+    image: null,
+  },
+  {
+    id: 4,
+    title: "PicSphere",
+    description: "Rede social para compartilhamento de fotos com filtros e álbuns colaborativos.",
+    image: "picshere.png",
+  },
+  {
+    id: 5,
+    title: "HealthTrack",
+    description: "Aplicativo para acompanhamento de saúde e hábitos, integrando dados de wearables",
+    image: null,
+  },
+  {
+    id: 6,
+    title: "MentorHub",
+    description: "Plataforma de conexão entre mentores e mentorados com videochamadas integradas.",
+    image: "mentorhub.png",
+  },
+]);
 </script>
 <template>
   <HeaderComponent />
- <main>
-      <section class="banner">
-        <h1><span>Projects</span></h1>
+  <main>
+    <section class="banner">
+      <h1><span>Projects</span></h1>
 
-        <p>
-          Explore a selection of my work, showcasing how I approach design
-          challenges. Each project reflects my commitment to creating
-          user-centered experiences that blend functionality with aesthetic
-          appeal.
-        </p>
-      </section>
+      <p>
+        Explore a selection of my work, showcasing how I approach design
+        challenges. Each project reflects my commitment to creating
+        user-centered experiences that blend functionality with aesthetic
+        appeal.
+      </p>
+    </section>
 
-      <section class="projects">
-        <ul class="white-itens">
+    <section class="projects">
+      <ul class="white-itens">
+        <li v-for="post in posts" :key="post.id">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.description }}</p>
+          <p v-if="post.image != null">
+            <img :src="'/images/' + post.image" alt="banner finwise" />
+          </p>
+          <p v-if="post.cat != null">
+          <ul>
+            <li v-for="categoria in post.cat" :key="categoria">{{ categoria }}</li>
+          </ul>
+          </p>
+        </li>
+      </ul>
+
+      <!-- <ul class="white-itens">
           <li>
             <h3>EcoCharge</h3>
             <p>
@@ -69,29 +124,29 @@ import FooterComponent from '../components/FooterComponent.vue';
               <img src="/images/mentorhub.png" alt="banner mentorhub" />
             </p>
           </li>
-        </ul>
-      </section>
-    </main>
+        </ul> -->
+    </section>
+  </main>
 
   <FooterComponent />
 </template>
 
 <style>
-section.projects{
-    & ul li{
-        & h3{
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin: 0.5rem;
-        }
-        & p{
-            color: #757575;
-            font-size: 0.9rem;
-            line-height: 1.3rem;
-            margin: 0.5rem;
-        }
-
+section.projects {
+  & ul li {
+    & h3 {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 0.5rem;
     }
-}
 
+    & p {
+      color: #757575;
+      font-size: 0.9rem;
+      line-height: 1.3rem;
+      margin: 0.5rem;
+    }
+
+  }
+}
 </style>
